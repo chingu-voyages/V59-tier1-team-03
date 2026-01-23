@@ -35,7 +35,6 @@ your repo access and to practice PR'ing with your team *before* you start
 coding!
 
 - Afolayan Timileyin: [GitHub](https://github.com/justtimi) / [LinkedIn](https://linkedin.com/in/timmyafolayan)
-- Teammate name #2: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
-
-   ...
-- Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Sebastian De La Quintana: [GitHub](https://github.com/sebastiandlq)
+- Valerie L.: [GitHub](https://github.com/val-ue) / [LinkedIn](https://www.linkedin.com/in/valerielabideveloper/)
+- M : [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
