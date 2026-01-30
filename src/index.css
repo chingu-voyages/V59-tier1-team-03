@@ -45,19 +45,76 @@ header {
     font-size: 1.2rem;
     font-weight: bold;
     padding: 0.5rem;
-    background-color: #f3f4f6;
+
     width: 4em;
     cursor: pointer;
 }
 
+.navigation-button:hover {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    /*background-color: #f3f4f6;*/
+    color: #101828;
+    background-color: #f9fafb;
+    width: 4em;
+    cursor: pointer;
+    border-radius: 0.5em;
+}
+
+
 .date {
     font-weight: 600;
+    background-color: #f3f4f6;
+    padding: 0.5rem;
+    border-radius: 1.5em;
+}
+
+.hero-wrapper {
+    position: relative;
+}
+
+.background-bubbles {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none; 
+    flex-direction: column;
+}
+
+.top-bubble {
+    background-color: #CDF9E3;
+    top: 33.3333%;         
+right: 25%;   
+    display: flex;
+    border-radius: 100%;
+    width: 8rem; 
+    height: 8rem; 
+}
+
+.middle-bubble {
+    background-color: #FFF4CC;
+    width: 2rem;
+    border-radius: 100%;
+    width: 6rem; 
+    height: 6rem; 
+}
+
+.bottom-bubble {
+    background-color: #DCECFF;
+    width: 10rem;
+    border-radius: 100%;
+    width: 10rem; 
+    height: 10rem; 
 }
 
 .landing-hero {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .start-button {
