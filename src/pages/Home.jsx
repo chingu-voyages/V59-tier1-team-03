@@ -1,7 +1,7 @@
 import React from "react";
 import BubbleBackground1 from "../backgrounds/bubblebackground-1";
 
-const LandingPage = () => {
+const Home = () => {
     return (
         <>
         <div className="hero-wrapper">
@@ -15,4 +15,4 @@ const LandingPage = () => {
     )
 }
 
-export default LandingPage
+export default Home
