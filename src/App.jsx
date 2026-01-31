@@ -1,39 +1,21 @@
 import React from "react";
+import Header from "./components/header";
+import Footer from "./components/footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./screens/landingPage";
+import RoleSelection from "./screens/roleSelection";
 
 const App = () => {
   return (
     <>
-      <header>
-        <div className="navigation">
-          <button className="navigation-button">Home</button>
-          <button className="navigation-button">Role</button>
-        </div>
-        <div className="date">1/29/2026</div>
-      </header>
-
-      <div className="hero-wrapper">
-        <div className="background-bubbles">
-          <div className="top-bubble-wrapper">
-            <div className="top-bubble"></div>
-          </div>
-          <div className="middle-bubble-wrapper">
-            <div className="middle-bubble"></div>
-          </div>
-          <div className="bottom-bubble-wrapper">
-            <div className="bottom-bubble"></div>
-          </div>
-        </div>
-
-        <div className="landing-hero">
-          <h1 className="main-title">Interview Test</h1>
-          <button className="start-button">Start</button>
-        </div>
-      </div>
-
-      <footer>
-        <div>Chingu 2025</div>
-        <a href="https://github.com/chingu-voyages/V59-tier1-team-03">Github</a>
-      </footer>
+      <BrowserRouter>
+        <Header />
+        <Routes >
+          <Route path="/" element={<LandingPage/>} />
+          <Route path="/role-selection" element={<RoleSelection/>}/>
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
   );
 };
