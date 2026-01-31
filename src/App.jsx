@@ -1,33 +1,20 @@
 import React from "react";
+import Home from "./pages/Home";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import {Routes, Route} from 'react-router-DOM'
+import Roles from "./pages/Roles";
 
 const App = () => {
   return (
     <>
-      <header>
-        <div className="navigation">
-          <button className="navigation-button">Home</button>
-          <button className="navigation-button">Role</button>
-        </div>
-        <div className="date">1/29/2026</div>
-      </header>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/roles" element={<Roles/>}/>
+      </Routes>
 
-      <div className="hero-wrapper">
-        <div className="background-bubbles">
-          <div className="top-bubble">.</div>
-          <div className="middle-bubble">.</div>
-          <div className="bottom-bubble">.</div>
-        </div>
-
-        <div className="landing-hero">
-          <h1>Interview Test</h1>
-          <button className="start-button">Start</button>
-        </div>
-      </div>
-
-      <footer>
-        <div>Chingu 2025</div>
-        <a href="https://github.com/chingu-voyages/V59-tier1-team-03">Github</a>
-      </footer>
+      <Footer />
     </>
   );
 };
