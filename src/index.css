@@ -30,12 +30,19 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #101828;
+  text-align: center;
+}
+
 button:hover {
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
 
-/********** LANFING PAGE **************/
+/********** LANDING PAGE **************/
 
 header {
   display: flex;
@@ -232,4 +239,109 @@ footer {
   box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/******************* QUESTIONS *******************/
+
+.question-main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: -webkit-fill-available;
+}
+
+.question-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.question-and-answer-wrapper {
+  width: 100%;
+  color: #263140;
+}
+
+.display-question {
+  background-color: #eff6ff;
+  border: #bedbff 2px solid;
+  border-radius: 1.5rem;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.answer-wrapper {
+  /*display: flex;
+  flex-direction: column;*/
+  margin-bottom: 1.5rem;
+}
+
+.answer-bubble {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem;
+  border: 2px solid #d1d5dc;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+  font-size: 1.125rem;
+
+}
+
+.answer-bubble-active {   /* after an answer is selected */
+  background-color: #f0fdf4;
+  display: flex;
+  align-items: center;
+  padding: 1.25rem;
+  border: 2px solid #10b981;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+  font-size: 1.125rem;
+}
+
+.checkbox-container {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid #d1d5dc;
+  border-radius: 0.25rem;
+}
+
+.checkbox-container-active { /* after an answer is selected */
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid #00c950;
+  border-radius: 0.25rem;
+  background-color: #00c950;
+}
+
+.answer-text-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.answer-bubble p {
+  /*font-size: 1.125rem;*/
+}
+
+.question-letter{
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.question-navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.next, .previous {
+  cursor: pointer;
 }
