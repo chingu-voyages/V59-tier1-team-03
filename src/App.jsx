@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import {Routes, Route} from 'react-router-dom'
 import RoleSelection from "./pages/Roles";
+import Questions from "./pages/Questions";
+
 
 const App = () => {
   return (
@@ -12,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/roles" element={<RoleSelection/>}/>
+        <Route path="/questions" element={<Questions/>}/>
       </Routes>
 
       <Footer />

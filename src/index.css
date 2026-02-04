@@ -30,12 +30,19 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #101828;
+  text-align: center;
+}
+
 button:hover {
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
 }
 
-/********** LANFING PAGE **************/
+/********** LANDING PAGE **************/
 
 header {
   display: flex;
@@ -232,4 +239,41 @@ footer {
   box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/******************* QUESTIONS *******************/
+
+.question-main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: -webkit-fill-available;
+}
+
+.question-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.display-question {
+  background-color: #eff6ff;
+  border: #bedbff 1px solid;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+.answer-wrapper {
+  /*display: flex;
+  flex-direction: column;*/
+}
+
+.answer-bubble {
+  display: flex;
+  align-items: center;
+}
+
+.question-navigation {
+  display: flex;
+  justify-content: space-between;
 }
