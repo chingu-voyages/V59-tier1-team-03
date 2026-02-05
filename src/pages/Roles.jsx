@@ -1,5 +1,6 @@
 import React from "react";
 import RoleCheckbox from "../components/roleSelection/roleCheckbox";
+import {Link} from 'react-router-dom'
 
 const RoleSelection = () => {
     return (
@@ -15,7 +16,7 @@ const RoleSelection = () => {
                 <RoleCheckbox option="Web Developer" />
                 <RoleCheckbox option="Python Developer" />
             </div>
-            <button className="button">Continue</button>
+            <Link to="/questions"><button className="button">Continue</button></Link>
         </div>
     </>
     )
