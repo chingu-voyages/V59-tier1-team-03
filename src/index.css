@@ -42,6 +42,10 @@ button:hover {
   transition: transform 0.2s ease-in-out;
 }
 
+.checkmark {
+
+}
+
 /********** LANDING PAGE **************/
 
 header {
@@ -50,6 +54,7 @@ header {
   justify-content: space-between;
   color: #4a5565;
   padding-top: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .navigation {
@@ -76,11 +81,18 @@ header {
   border-radius: 0.5em;
 }
 
-.date {
-  font-weight: 600;
+.highlight {/*gray bubble around date and question-number*/
   background-color: #f3f4f6;
   padding: 0.5rem 1.2rem;
   border-radius: 1.5em;
+  /*font-size: 1.1em;*/
+}
+
+.date {
+  font-weight: 600;
+  /*background-color: #f3f4f6;*/
+  /*padding: 0.5rem 1.2rem;*/
+  /*border-radius: 1.5em;*/
   font-size: 1.1em;
 }
 
@@ -185,7 +197,9 @@ footer {
   display: flex;
   justify-content: space-between;
   color: #727a89;
-  padding-bottom: 1.5rem;
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  margin-top: 1rem;
 }
 
 
@@ -216,10 +230,8 @@ footer {
   width: 90%;
   max-width: 800px;
   min-height: 4rem;
-
   font-size: clamp(1rem, 5vw, 2rem);
   font-weight: 500;
-
   margin: 0.4rem 0rem;
 }
 .checkbox{
@@ -247,7 +259,7 @@ footer {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: -webkit-fill-available;
+  /*height: -webkit-fill-available;*/
 }
 
 .question-title {
@@ -256,6 +268,15 @@ footer {
   justify-content: space-between;
   width: 100%;
   margin-bottom: 1.5rem;
+}
+
+.question-number {
+  font-weight: 700;
+  background-color: #f3f4f6;
+
+  border-radius: 1.5em;
+  font-size: 1.25em;
+  color: #364153;
 }
 
 .question-and-answer-wrapper {
@@ -319,6 +340,10 @@ footer {
   border: 3px solid #00c950;
   border-radius: 0.25rem;
   background-color: #00c950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
 .answer-text-wrapper {
@@ -343,5 +368,28 @@ footer {
 }
 
 .next, .previous {
+  cursor: pointer;
+  font-size: 1.125rem;
+
+}
+
+.next {
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 1rem;
+  background-color: #00d969;
+  cursor: pointer;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.previous {
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  color: #364153;
+  border-radius: 1rem;
+  background-color: #f3f4f6;
   cursor: pointer;
 }
