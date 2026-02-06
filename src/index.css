@@ -220,6 +220,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2.5rem;
 }
 .role-option-wrapper{
   display: flex;
@@ -233,6 +234,7 @@ footer {
   font-size: clamp(1rem, 5vw, 2rem);
   font-weight: 500;
   margin: 0.4rem 0rem;
+  gap: 1.25rem;
 }
 .checkbox{
   margin: 0.5rem;
@@ -328,15 +330,22 @@ footer {
 }
 
 .checkbox-container {
-  width: 2rem;
-  height: 2rem;
+  min-width: 2rem;
+  min-height: 2rem;
   border: 3px solid #d1d5dc;
   border-radius: 0.25rem;
 }
 
+.role-checkbox-container {
+  min-width: 2rem;
+  min-height: 2rem;
+  border: 3px solid #d1d5dc;
+  border-radius: 1rem;
+}
+
 .checkbox-container-active { /* after an answer is selected */
-  width: 2rem;
-  height: 2rem;
+  min-width: 2rem;
+  min-height: 2rem;
   border: 3px solid #00c950;
   border-radius: 0.25rem;
   background-color: #00c950;

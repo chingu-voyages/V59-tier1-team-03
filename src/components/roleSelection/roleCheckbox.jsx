@@ -4,7 +4,9 @@ const RoleCheckbox = props => {
     return (
         <>
             <label className="role-option-wrapper" for={props.option}>
-                <input className="checkbox" type="checkbox" id={props.option}/>
+                {/*<input className="checkbox" type="checkbox" id={props.option}/>*/}
+                <div className="role-checkbox-container">
+                </div>
                 {props.option}
             </label>
         </>
