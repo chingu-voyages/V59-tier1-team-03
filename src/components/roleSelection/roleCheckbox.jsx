@@ -1,14 +1,19 @@
 import React from "react";
+import Checkmark from "../checkmark";
 
-const RoleCheckbox = props => {
+const RoleCheckbox = ({handleSelection, option, selected}) => {
     return (
         <>
-            <label className="role-option-wrapper" for={props.option}>
-                {/*<input className="checkbox" type="checkbox" id={props.option}/>*/}
-                <div className="role-checkbox-container">
+            <div onClick=
+            {e => handleSelection(option)} 
+            className={`role-option-wrapper ${selected? "role-option-wrapper--selected" : ""}`} >
+                <div className={`role-checkbox-container ${selected? "role-checkbox-container--selected" : ""}`}>
+                    {
+                        (selected) ? <Checkmark /> : <></>
+                    }
                 </div>
-                {props.option}
-            </label>
+                {option}
+            </div>
         </>
     )
 }

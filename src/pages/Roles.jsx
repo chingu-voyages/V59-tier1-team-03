@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import RoleCheckbox from "../components/roleSelection/roleCheckbox";
 import {Link} from 'react-router-dom'
 
 const RoleSelection = () => {
+    const roles = ["Scrum Master", "Product Owner", "UI UX Designer", "Web Developer", "Python Developer"]
+
+    const [selectedOption, setSelectedOption] = useState()
+    const handleSelection = role =>{
+        if(selectedOption == role){
+            setSelectedOption()
+        }else{
+            setSelectedOption(role);
+        }
+    }
+
     return (
     <>
         <div className="select-role-wrapper">
@@ -10,13 +21,13 @@ const RoleSelection = () => {
                 Select a Role
             </h2>
             <div className="role-list">
-                <RoleCheckbox option="Scrum Master" />
-                <RoleCheckbox option="Product Owner" />
-                <RoleCheckbox option="UI/UX Designer" />
-                <RoleCheckbox option="Web Developer" />
-                <RoleCheckbox option="Python Developer" />
+                {
+                    roles.map(
+                        role => <RoleCheckbox selected={role==selectedOption? true : false} key={role} option={role} handleSelection={handleSelection}/>
+                    )
+                }
             </div>
-            <Link to="/questions"><button className="button">Continue</button></Link>
+            <Link to={"/questions/"+selectedOption}><button className="button">Continue</button></Link>
         </div>
     </>
     )
