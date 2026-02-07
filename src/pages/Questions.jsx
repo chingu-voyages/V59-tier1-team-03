@@ -1,8 +1,14 @@
 import React from 'react'
 import Checkmark from '../components/checkmark'
 import Answerbubble from '../components/question-page/answer-bubble'
+import { useParams } from 'react-router-dom'
 
 const Questions = () => {
+
+  const role = useParams();
+  console.log(role);
+  
+
   return (
     <>
       <div className="question-main">

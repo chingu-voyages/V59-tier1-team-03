@@ -46,6 +46,10 @@ button:hover {
 
 }
 
+ol{
+  list-style: decimal;
+}
+
 /********** LANDING PAGE **************/
 
 header {
@@ -106,7 +110,7 @@ header {
   justify-content: space-around;
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   flex-direction: column;
 }
@@ -168,6 +172,10 @@ header {
 
 .main-title {
   font-size: clamp(3rem, 17vw, 8rem);
+}
+
+.main-text{
+  max-width: 900px;
 }
 
 .start-button {
@@ -236,6 +244,31 @@ footer {
   margin: 0.4rem 0rem;
   gap: 1.25rem;
 }
+.role-option-wrapper--selected{
+  border: 3px solid #00c950;
+  border-radius: 0.25rem;
+  background-color: #f0fdf4;
+}
+
+.role-checkbox-container {
+  min-width: 2rem;
+  min-height: 2rem;
+  border: 3px solid #d1d5dc;
+  border-radius: 1rem;
+}
+
+.role-checkbox-container--selected {
+  min-width: 2rem;
+  min-height: 2rem;
+  border: 3px solid #00c950;
+  border-radius: 1.5rem;
+  background-color: #00c950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
 .checkbox{
   margin: 0.5rem;
   width: 1.5rem;
@@ -334,13 +367,6 @@ footer {
   min-height: 2rem;
   border: 3px solid #d1d5dc;
   border-radius: 0.25rem;
-}
-
-.role-checkbox-container {
-  min-width: 2rem;
-  min-height: 2rem;
-  border: 3px solid #d1d5dc;
-  border-radius: 1rem;
 }
 
 .checkbox-container-active { /* after an answer is selected */
