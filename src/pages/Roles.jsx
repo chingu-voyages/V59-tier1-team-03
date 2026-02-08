@@ -3,7 +3,7 @@ import RoleCheckbox from "../components/roleSelection/roleCheckbox";
 import {Link} from 'react-router-dom'
 
 const RoleSelection = () => {
-    const roles = ["Scrum Master", "Product Owner", "UI UX Designer", "Web Developer", "Python Developer"]
+    const roles = ["Scrum Master", "Scrum Product Owner", "UI UX Designer", "Web Developer", "Python Developer"]
 
     const [selectedOption, setSelectedOption] = useState()
     const handleSelection = role =>{
@@ -27,7 +27,7 @@ const RoleSelection = () => {
                     )
                 }
             </div>
-            <Link to={"/questions/"+selectedOption}><button className="button">Continue</button></Link>
+            <Link to={selectedOption ? "/questions/"+selectedOption: "#"}><button className="button" disabled={!selectedOption}>Continue</button></Link>
         </div>
     </>
     )
