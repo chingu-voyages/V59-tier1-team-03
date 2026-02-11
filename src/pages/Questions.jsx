@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Checkmark from '../components/checkmark'
 import Answerbubble from '../components/question-page/answer-bubble'
 import { useParams } from 'react-router-dom'
@@ -7,34 +7,11 @@ import questions from '../flashcards'
 const Questions = () => {
     
   const {role} = useParams();
-
-  /* let flashcards;
-  switch (role) {
-    case "Product Owner":
-      flashcards = questions['Scrum Product Owner']
-      break;
-    case "Scrum Master":
-      flashcards = questions['Scrum Master']
-      break;
-    case "UI UX Designer":
-      flashcards = questions.
-      break;
-    case "Web Developer":
-      flashcards = questions[3]
-      break;
-    case "Python Developer":
-      flashcards = questions[4]
-      break;
-    default:
-      break;
-  }
   
-  flashcards = flashcards.flashcards */
-
   const roleData = questions[role]
   const flashcards = roleData ? roleData.flashcards : [];
-  
 
+  const [selecetedAnswer, setSelectedAnswer] = useState();
   const [currentQuestion, setCurrentQuestion] = React.useState(0)
 
   const nextQuestion = () => {
@@ -43,6 +20,14 @@ const Questions = () => {
   
   const previousQuestion = () => {
     setCurrentQuestion((prev)=> prev - 1 >=0 ? prev - 1 : prev)
+  }
+
+  const handleSelection = selected => {
+    if(selected == selecetedAnswer){
+      setSelectedAnswer()
+    }else{
+      setSelectedAnswer(selected)
+    }
   }
 
   return (
@@ -57,7 +42,7 @@ const Questions = () => {
           <div className="display-question">{flashcards[currentQuestion].question || "No question available"}</div>
           <div className="answer-wrapper">
             {flashcards[currentQuestion].options && Object.entries(flashcards[currentQuestion].options).map(([key, value]) => (
-              <Answerbubble key={key} letter={key} answer={value} selected={key === flashcardds[currentQuestion].answer} />
+              <Answerbubble key={key} letter={key} answer={value} selected={key === selecetedAnswer} selectorHandler={handleSelection} />
             ))}
           </div>
         </div>

@@ -418,6 +418,16 @@ footer {
   min-height: 2rem;
   border: 3px solid #d1d5dc;
   border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.answer-bubble-active .checkbox-container{   /* after an answer is selected */
+  background-color: #10b981;
+  border-color: #10b981;
+  cursor: pointer;
 }
 
 .checkbox-container-active { /* after an answer is selected */
