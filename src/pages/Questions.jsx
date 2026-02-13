@@ -11,22 +11,35 @@ const Questions = () => {
   const roleData = questions[role]
   const flashcards = roleData ? roleData.flashcards : [];
 
-  const [selecetedAnswer, setSelectedAnswer] = useState();
-  const [currentQuestion, setCurrentQuestion] = React.useState(0)
+  const [currentSelection, setCurrentSelection] = useState();
+  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [savedAnswers, setSavedAnswers] = useState(new Array(flashcards.length));
 
-  const nextQuestion = () => {
-    setCurrentQuestion((prev)=> prev + 1 < flashcards.length ? prev + 1 : prev)
+
+  const goToQuestion = index => {
+    if(index < flashcards.length && index >= 0){
+      setCurrentQuestion(index)
+      saveAnswer()
+      console.log(savedAnswers);
+      setCurrentSelection(savedAnswers[index])
+      console.log(currentSelection);
+      
+    }
   }
-  
-  const previousQuestion = () => {
-    setCurrentQuestion((prev)=> prev - 1 >=0 ? prev - 1 : prev)
+
+  const saveAnswer = () => {
+    if(currentSelection){
+      let currentAnswers = savedAnswers
+      currentAnswers[currentQuestion] = currentSelection
+      setSavedAnswers(currentAnswers)
+    }
   }
 
   const handleSelection = selected => {
-    if(selected == selecetedAnswer){
-      setSelectedAnswer()
+    if(selected == currentSelection){
+      setCurrentSelection()
     }else{
-      setSelectedAnswer(selected)
+      setCurrentSelection(selected)
     }
   }
 
@@ -42,16 +55,15 @@ const Questions = () => {
           <div className="display-question">{flashcards[currentQuestion].question || "No question available"}</div>
           <div className="answer-wrapper">
             {flashcards[currentQuestion].options && Object.entries(flashcards[currentQuestion].options).map(([key, value]) => (
-              <Answerbubble key={key} letter={key} answer={value} selected={key === selecetedAnswer} selectorHandler={handleSelection} />
+              <Answerbubble key={key} letter={key} answer={value} selected={key === currentSelection} selectorHandler={handleSelection} />
             ))}
           </div>
         </div>
 
         <div className="question-navigation">
-          <button onClick={previousQuestion} className="previous">Previous</button>
-          <button onClick={nextQuestion} className="next">Next</button>
+          <button onClick={() => {goToQuestion(currentQuestion-1)}} className="previous">Previous</button>
+          <button onClick={() => {goToQuestion(currentQuestion+1)}} className="next">Next</button>
         </div>
-
       </div>
       
     </>
