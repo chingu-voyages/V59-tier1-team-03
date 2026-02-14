@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Checkmark from '../components/checkmark'
 import Answerbubble from '../components/question-page/answer-bubble'
 import { useParams } from 'react-router-dom'
@@ -7,42 +7,40 @@ import questions from '../flashcards'
 const Questions = () => {
     
   const {role} = useParams();
-
-  /* let flashcards;
-  switch (role) {
-    case "Product Owner":
-      flashcards = questions['Scrum Product Owner']
-      break;
-    case "Scrum Master":
-      flashcards = questions['Scrum Master']
-      break;
-    case "UI UX Designer":
-      flashcards = questions.
-      break;
-    case "Web Developer":
-      flashcards = questions[3]
-      break;
-    case "Python Developer":
-      flashcards = questions[4]
-      break;
-    default:
-      break;
-  }
   
-  flashcards = flashcards.flashcards */
-
   const roleData = questions[role]
   const flashcards = roleData ? roleData.flashcards : [];
-  
 
-  const [currentQuestion, setCurrentQuestion] = React.useState(0)
+  const [currentSelection, setCurrentSelection] = useState();
+  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [savedAnswers, setSavedAnswers] = useState(new Array(flashcards.length));
 
-  const nextQuestion = () => {
-    setCurrentQuestion((prev)=> prev + 1 < flashcards.length ? prev + 1 : prev)
+
+  const goToQuestion = index => {
+    if(index < flashcards.length && index >= 0){
+      setCurrentQuestion(index)
+      saveAnswer()
+      console.log(savedAnswers);
+      setCurrentSelection(savedAnswers[index])
+      console.log(currentSelection);
+      
+    }
   }
-  
-  const previousQuestion = () => {
-    setCurrentQuestion((prev)=> prev - 1 >=0 ? prev - 1 : prev)
+
+  const saveAnswer = () => {
+    if(currentSelection){
+      let currentAnswers = savedAnswers
+      currentAnswers[currentQuestion] = currentSelection
+      setSavedAnswers(currentAnswers)
+    }
+  }
+
+  const handleSelection = selected => {
+    if(selected == currentSelection){
+      setCurrentSelection()
+    }else{
+      setCurrentSelection(selected)
+    }
   }
 
   return (
@@ -57,16 +55,15 @@ const Questions = () => {
           <div className="display-question">{flashcards[currentQuestion].question || "No question available"}</div>
           <div className="answer-wrapper">
             {flashcards[currentQuestion].options && Object.entries(flashcards[currentQuestion].options).map(([key, value]) => (
-              <Answerbubble key={key} letter={key} answer={value} selected={key === flashcardds[currentQuestion].answer} />
+              <Answerbubble key={key} letter={key} answer={value} selected={key === currentSelection} selectorHandler={handleSelection} />
             ))}
           </div>
         </div>
 
         <div className="question-navigation">
-          <button onClick={previousQuestion} className="previous">Previous</button>
-          <button onClick={nextQuestion} className="next">Next</button>
+          <button onClick={() => {goToQuestion(currentQuestion-1)}} className="previous">Previous</button>
+          <button onClick={() => {goToQuestion(currentQuestion+1)}} className="next">Next</button>
         </div>
-
       </div>
       
     </>
