@@ -1,5 +1,5 @@
 const questions = {
-  "Scrum Product Owner":{
+  "scrum-product-owner":{
     "role": "Scrum Product Owner",
     "focus": "Backlog management, maximizing value, stakeholder management (Aligns with CSPO)",
     "flashcards": [
@@ -65,7 +65,7 @@ const questions = {
       }
     ]
   },
-  "Scrum Master" :{
+  "scrum-master" :{
     "role": "Scrum Master",
     "focus": "Servant leadership, coaching, removing impediments (Aligns with CSM)",
     "flashcards": [
@@ -131,7 +131,7 @@ const questions = {
       }
     ]
   },
-  "UI UX Designer": {
+  "ui-ux-designer": {
     "role": "UI/UX Designer",
     "focus": "Accessibility, Responsiveness, Design Thinking (No code)",
     "flashcards": [      
@@ -197,7 +197,7 @@ const questions = {
       }
     ]
   },
-  "Web Developer": {
+  "web-developer": {
     "role": "Web Developer",
     "focus": "Web fundamentals + Data Structures & Algorithms (DSA)",
     "flashcards": [      
@@ -263,7 +263,7 @@ const questions = {
       }
     ]
   },
-  "Python Developer": {
+  "python-developer": {
     "role": "Python Developer",
     "focus": "Python syntax + Data Structures & Algorithms (DSA)",
     "flashcards": [      

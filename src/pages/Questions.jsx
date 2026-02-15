@@ -32,7 +32,7 @@ const Questions = () => {
 
   const roleData = questions[role];
   const flashcards = roleData ? roleData.flashcards : [];
-  
+
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
 
   if (!flashcards || flashcards.length === 0) {
@@ -54,11 +54,13 @@ const Questions = () => {
     setCurrentQuestion((prev) => (prev - 1 >= 0 ? prev - 1 : prev));
   };
 
+  const formattedRole = role?.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+
   return (
     <>
       <div className="question-main">
         <div className="question-title">
-          <h2 className="question-title-h2"> {role} Questions</h2>
+          <h2 className="question-title-h2"> {formattedRole} Questions</h2>
           <div className="question-number highlight">{`${currentQuestion + 1} / ${flashcards.length}`}</div>
         </div>
 

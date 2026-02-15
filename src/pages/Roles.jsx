@@ -3,15 +3,13 @@ import RoleCheckbox from "../components/roleSelection/roleCheckbox";
 import {Link} from 'react-router-dom'
 
 const RoleSelection = () => {
-    const roles = ["Scrum Master", "Scrum Product Owner", "UI UX Designer", "Web Developer", "Python Developer"]
+    const roles = [{label: "Scrum Master", value: "scrum-master"}, {label: "Scrum Product Owner", value: "scrum-product-owner"}, {label: "UI UX Designer", value: "ui-ux-designer"}, {label: "Web Developer", value: "web-developer"}, {label: "Python Developer", value: "python-developer"}]
 
-    const [selectedOption, setSelectedOption] = useState()
-    const handleSelection = role =>{
-        if(selectedOption == role){
-            setSelectedOption()
-        }else{
-            setSelectedOption(role);
-        }
+    const [selectedOption, setSelectedOption] = useState(null)
+    const handleSelection = (value) =>{
+// This is a shorter way. 
+            setSelectedOption(prev => prev === value ? null : value);
+
     }
 
     return (
@@ -23,11 +21,11 @@ const RoleSelection = () => {
             <div className="role-list">
                 {
                     roles.map(
-                        role => <RoleCheckbox selected={role==selectedOption? true : false} key={role} option={role} handleSelection={handleSelection}/>
+                        role => <RoleCheckbox selected={role.value===selectedOption} key={role.value} option={role.label} handleSelection={()=>handleSelection(role.value)}/>
                     )
                 }
             </div>
-            <Link to={selectedOption ? "/questions/"+selectedOption: "#"}><button className="button" disabled={!selectedOption}>Continue</button></Link>
+            <Link to={selectedOption ? `/questions/${selectedOption}`: "#"}><button className="button" disabled={!selectedOption}>Continue</button></Link>
         </div>
     </>
     )
