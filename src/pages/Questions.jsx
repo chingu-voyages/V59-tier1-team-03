@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Checkmark from '../components/checkmark'
 import Answerbubble from '../components/question-page/answer-bubble'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import questions from '../flashcards'
 
 const Questions = () => {
     
   const {role} = useParams();
+  const navigate = useNavigate();
   
   const roleData = questions[role]
   const flashcards = roleData ? roleData.flashcards : [];
 
-  const [currentSelection, setCurrentSelection] = useState();
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [savedAnswers, setSavedAnswers] = useState(new Array(flashcards.length).fill(null));
+  const [savedAnswers, setSavedAnswers] = useState([]);
 
-    if (!flashcards || flashcards.length === 0) {
+  const currentSelection = savedAnswers[currentQuestion] ?? null;
+
+    if (flashcards.length === 0) {
     return (
       <div className="question-main">
         <h2>No questions available for this role.</h2>
@@ -27,36 +29,32 @@ const Questions = () => {
   useEffect(() => {
   setSavedAnswers(new Array(flashcards.length).fill(null));
   setCurrentQuestion(0);
-  setCurrentSelection(null);
-}, [role]);
+}, [role, flashcards.length]);
+
 
 
 
   const goToQuestion = (index) => {
     if(index >= 0 && index < flashcards.length ){
-      saveAnswer()
       setCurrentQuestion(index)
       console.log(savedAnswers);
-      setCurrentSelection(savedAnswers[index])
-      console.log(currentSelection);
       
     }
   }
 
-  const saveAnswer = () => {
-    if(currentSelection){
-      const currentAnswers = [...savedAnswers]
-      currentAnswers[currentQuestion] = currentSelection
-      setSavedAnswers(currentAnswers)
-    }
-  }
 
   const handleSelection = selected => {
-    if(selected == currentSelection){
-      setCurrentSelection()
-    }else{
-      setCurrentSelection(selected)
+    setSavedAnswers(prev => {
+      const updated = [...prev]
+       if (updated[currentQuestion] === selected) {
+        updated[currentQuestion] = null
+       }else{
+      updated[currentQuestion] = selected 
     }
+
+    return updated
+
+    })
   }
 
     const formattedRole = role?.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
@@ -88,8 +86,15 @@ const Questions = () => {
         </div>
 
         <div className="question-navigation">
-          <button onClick={() => {goToQuestion(currentQuestion-1)}} className="previous">Previous</button>
-          <button onClick={() => {goToQuestion(currentQuestion+1)}} className="next">Next</button>
+          <button onClick={() => {
+            goToQuestion(currentQuestion-1)
+            
+            }} className="previous" disabled={currentQuestion === 0}>Previous</button>
+
+            
+          <button onClick={ () => { if (currentQuestion === flashcards.length - 1) {
+              navigate("/summary")}
+              else {goToQuestion(currentQuestion+1)} }} disabled={currentSelection === null } className="next">{currentQuestion === flashcards.length -1 ? "Finish" : "Next"}</button>
         </div>
       </div>
     </>
