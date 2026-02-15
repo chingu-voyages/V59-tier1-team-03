@@ -1,41 +1,21 @@
-import React from "react";
-import Checkmark from "../components/checkmark";
-import Answerbubble from "../components/question-page/answer-bubble";
-import { useParams } from "react-router-dom";
-import questions from "../flashcards";
+import React, { useState } from 'react'
+import Checkmark from '../components/checkmark'
+import Answerbubble from '../components/question-page/answer-bubble'
+import { useParams } from 'react-router-dom'
+import questions from '../flashcards'
 
 const Questions = () => {
-  const { role } = useParams();
-
-  /* let flashcards;
-  switch (role) {
-    case "Product Owner":
-      flashcards = questions['Scrum Product Owner']
-      break;
-    case "Scrum Master":
-      flashcards = questions['Scrum Master']
-      break;
-    case "UI UX Designer":
-      flashcards = questions.
-      break;
-    case "Web Developer":
-      flashcards = questions[3]
-      break;
-    case "Python Developer":
-      flashcards = questions[4]
-      break;
-    default:
-      break;
-  }
+    
+  const {role} = useParams();
   
-  flashcards = flashcards.flashcards */
-
-  const roleData = questions[role];
+  const roleData = questions[role]
   const flashcards = roleData ? roleData.flashcards : [];
 
-  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [currentSelection, setCurrentSelection] = useState();
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [savedAnswers, setSavedAnswers] = useState(new Array(flashcards.length).fill(null));
 
-  if (!flashcards || flashcards.length === 0) {
+    if (!flashcards || flashcards.length === 0) {
     return (
       <div className="question-main">
         <h2>No questions available for this role.</h2>
@@ -44,17 +24,42 @@ const Questions = () => {
   }
   const currentCard = flashcards[currentQuestion];
 
-  const nextQuestion = () => {
-    setCurrentQuestion((prev) =>
-      prev + 1 < flashcards.length ? prev + 1 : prev,
-    );
-  };
+  useEffect(() => {
+  setSavedAnswers(new Array(flashcards.length).fill(null));
+  setCurrentQuestion(0);
+  setCurrentSelection(null);
+}, [role]);
 
-  const previousQuestion = () => {
-    setCurrentQuestion((prev) => (prev - 1 >= 0 ? prev - 1 : prev));
-  };
 
-  const formattedRole = role?.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+
+  const goToQuestion = (index) => {
+    if(index >= 0 && index < flashcards.length ){
+      saveAnswer()
+      setCurrentQuestion(index)
+      console.log(savedAnswers);
+      setCurrentSelection(savedAnswers[index])
+      console.log(currentSelection);
+      
+    }
+  }
+
+  const saveAnswer = () => {
+    if(currentSelection){
+      const currentAnswers = [...savedAnswers]
+      currentAnswers[currentQuestion] = currentSelection
+      setSavedAnswers(currentAnswers)
+    }
+  }
+
+  const handleSelection = selected => {
+    if(selected == currentSelection){
+      setCurrentSelection()
+    }else{
+      setCurrentSelection(selected)
+    }
+  }
+
+    const formattedRole = role?.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 
   return (
     <>
@@ -75,19 +80,16 @@ const Questions = () => {
                   key={key}
                   letter={key}
                   answer={value}
-                  selected={key === currentCard.answer}
+                  selected= {key === currentSelection}
+                  selectorHandler={handleSelection}
                 />
               ))}
           </div>
         </div>
 
         <div className="question-navigation">
-          <button onClick={previousQuestion} className="previous">
-            Previous
-          </button>
-          <button onClick={nextQuestion} className="next">
-            Next
-          </button>
+          <button onClick={() => {goToQuestion(currentQuestion-1)}} className="previous">Previous</button>
+          <button onClick={() => {goToQuestion(currentQuestion+1)}} className="next">Next</button>
         </div>
       </div>
     </>
