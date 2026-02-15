@@ -26,8 +26,21 @@ const Questions = () => {
   }
   const currentCard = flashcards[currentQuestion];
 
+  useEffect(()=> {
+    localStorage.setItem("quizAnswers", JSON.stringify(savedAnswers));
+    localStorage.setItem("quizRole", role);
+  }, [savedAnswers, role]);
+
   useEffect(() => {
-  setSavedAnswers(new Array(flashcards.length).fill(null));
+    const saved = JSON.parse(localStorage.getItem("quizAnswers"));
+    const savedRole = localStorage.getItem("quizRole");
+
+    if (saved && savedRole === role) {
+      setSavedAnswers(saved);
+    } else {
+      setSavedAnswers(new Array(flashcards.length).fill(null));
+    }
+  
   setCurrentQuestion(0);
 }, [role, flashcards.length]);
 
