@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Checkmark from '../components/checkmark'
 import Answerbubble from '../components/question-page/answer-bubble'
 import { useParams, useNavigate } from 'react-router-dom'
 import questions from '../flashcards'
 
 const Questions = () => {
+
+  // const {setCorrectAnswers, setTotalQuestions} = useContext(QuestionContext)
     
   const {role} = useParams();
   const navigate = useNavigate();
@@ -14,6 +16,8 @@ const Questions = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [savedAnswers, setSavedAnswers] = useState([]);
+  const [wrongCount, setWrongCount] = useState(0);
+  const [questionMistake, setQuestionMistake] = React.useState({});
 
   const currentSelection = savedAnswers[currentQuestion] ?? null;
 
@@ -59,15 +63,33 @@ const Questions = () => {
   const handleSelection = selected => {
     setSavedAnswers(prev => {
       const updated = [...prev]
+
+      const correctAnswer = currentCard.answer;
        if (updated[currentQuestion] === selected) {
         updated[currentQuestion] = null
        }else{
       updated[currentQuestion] = selected 
     }
 
-    return updated
+    const isWrong = selected !== correctAnswer;
 
-    })
+    setQuestionMistake(prev => {
+      const recorded = {...prev}
+
+      if (isWrong && !recorded[currentQuestion]) {
+        setWrongCount(prev => prev + 1)
+        recorded[currentQuestion] = true
+      }
+
+      if (!isWrong){
+        recorded[currentQuestion] = false
+      }
+      return recorded;
+    });
+
+    return updated;
+
+    });
   }
 
     const formattedRole = role?.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
@@ -105,7 +127,7 @@ const Questions = () => {
             }} className="previous" disabled={currentQuestion === 0}>Previous</button>
 
             
-          <button onClick={ () => { if (currentQuestion === flashcards.length - 1) {
+          <button onClick={ () => { if (wrongCount >= 3 || currentQuestion === flashcards.length - 1) {
               navigate("/summary")}
               else {goToQuestion(currentQuestion+1)} }} disabled={currentSelection === null } className="next">{currentQuestion === flashcards.length -1 ? "Finish" : "Next"}</button>
         </div>

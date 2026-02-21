@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useMemo, useState } from "react";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -17,12 +17,10 @@ const App = () => {
         <Route path="/questions/:role" element={<Questions/>}/>
         <Route path="/summary" element={<Summary/>}/>        
       </Routes>
-
       <Footer />
-      
-
     </>
   );
 };
 
 export default App;
+
