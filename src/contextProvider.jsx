@@ -17,11 +17,14 @@ class QuestionProvider extends Component {
         });
     };
 
-    resetResults = (total = 0) => {
+    resetResults = () => {
         this.setState({
             correctQuestions : 0,
-            totalQuestions : total
+            totalQuestions : 0
         });
+
+        localStorage.removeItem("quizAnswers");
+    localStorage.removeItem("quizRole");
     };
 
     render() {
