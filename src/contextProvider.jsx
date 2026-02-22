@@ -1,34 +1,43 @@
-import React, { Component, useContext } from "react";
+import { Component } from "react";
+import QuizContext from "./QuizContext";
 
-
-const {Provider, Consumer} = useContext();
 
 class QuestionProvider extends Component {
     state = {
-        correctAnswers : 5,
-        totalQuestions : 0,
-        setResults : (correct, total) => {
-            this.setState({
-                correctAnswers: correct,
-                totalQuestions: total
-            })
-        }
-    }
+        correctQuestions : 0,
+        totalQuestions : 0
+    };
+
+    setResults = (correct, total) => {
+        console.log(correct, total, "from context provider");
+        
+        this.setState({
+            correctQuestions: correct,
+            totalQuestions: total
+        });
+    };
+
+    resetResults = (total = 0) => {
+        this.setState({
+            correctQuestions : 0,
+            totalQuestions : total
+        });
+    };
+
     render() {
         return (
-            <Provider
-                value = {{
-  port default QuestionProvider;       ????           correctAnswers: this.state.correctAnswers,
-                    totalQuestions: this.state.totalQuestions,
-                    setResults: this.state.setResults
-                }}
-            >
+            <QuizContext.Provider value={{
+                correctQuestions: this.state.correctQuestions,
+                totalQuestions: this.state.totalQuestions,
+                setResults: this.setResults,
+                resetResults: this.resetResults
+            }}>
                 {this.props.children}
-            </Provider>
-        )
-    }
+            </QuizContext.Provider>
+
+        );
+    };
 };
 
-export {QuestionProvider};
+export default QuestionProvider;
 
-export default Consumer
