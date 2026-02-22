@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Checkmark from '../components/checkmark'
 import Answerbubble from '../components/question-page/answer-bubble'
 import { useParams, useNavigate } from 'react-router-dom'
 import questions from '../flashcards'
+import QuizContext from "../QuizContext";
+
 
 const Questions = () => {
+  const { correctQuestions, totalQuestions, setResults  } = useContext(QuizContext);
     
   const {role} = useParams();
   const navigate = useNavigate();
@@ -14,6 +17,16 @@ const Questions = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [savedAnswers, setSavedAnswers] = useState([]);
+  const [wrongCount, setWrongCount] = useState(0);
+  const [questionMistake, setQuestionMistake] = React.useState({});
+  const [quizActive, setQuizActive] = useState(true);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+
+  const States = Object.freeze({
+    ANSWERING : 0,
+    SHOWING : 1
+  })
+  const [state, setState] = useState(States.ANSWERING)
 
   const currentSelection = savedAnswers[currentQuestion] ?? null;
 
@@ -59,18 +72,76 @@ const Questions = () => {
   const handleSelection = selected => {
     setSavedAnswers(prev => {
       const updated = [...prev]
+
+      const correctAnswer = currentCard.answer;
        if (updated[currentQuestion] === selected) {
         updated[currentQuestion] = null
        }else{
       updated[currentQuestion] = selected 
     }
 
-    return updated
+    const isWrong = selected !== correctAnswer;
 
-    })
+    setQuestionMistake(prev => {
+      const recorded = {...prev}
+
+      if (isWrong && !recorded[currentQuestion]) {
+        setWrongCount(prev => prev + 1)
+        recorded[currentQuestion] = true
+      }
+
+      if (!isWrong){
+        recorded[currentQuestion] = false
+      }
+      return recorded;
+    });
+
+    return updated;
+
+    });
   }
 
-    const formattedRole = role?.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+  const submitAnswer = () => {
+    if(!quizActive){
+
+      setResults(correctAnswers, flashcards.length)
+
+      navigate("/summary")
+      return
+    }
+    if(state == States.SHOWING){
+      goToQuestion(currentQuestion + 1)
+      setState(States.ANSWERING)
+      return
+    }
+    
+    if(isCorrectAnswer()){
+      //Needs rethinking of handleSelection
+      correctAnswer()
+    }else{
+      wrongAnswer()
+    }
+  }
+  const isCorrectAnswer = () => {
+    return currentSelection == flashcards[currentQuestion].answer
+  }
+  const correctAnswer = () => {
+    setState(States.SHOWING)
+    setCorrectAnswers(correctAnswers + 1)
+    alert(flashcards[currentQuestion].rationale)
+    if(currentQuestion === flashcards.length - 1){
+      setQuizActive(false)
+    }
+  }
+  const wrongAnswer = () => {
+    setWrongCount(wrongCount + 1)
+    if (wrongCount >= 3) {
+      setQuizActive(false)
+    }
+    alert("Wrong Answer")
+  }
+
+  const formattedRole = role?.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 
   return (
     <>
@@ -98,16 +169,15 @@ const Questions = () => {
           </div>
         </div>
 
+
         <div className="question-navigation">
-          <button onClick={() => {
+          {/* <button onClick={() => {
             goToQuestion(currentQuestion-1)
             
-            }} className="previous" disabled={currentQuestion === 0}>Previous</button>
+            }} className="previous" disabled={currentQuestion === 0}>Previous</button> */}
 
             
-          <button onClick={ () => { if (currentQuestion === flashcards.length - 1) {
-              navigate("/summary")}
-              else {goToQuestion(currentQuestion+1)} }} disabled={currentSelection === null } className="next">{currentQuestion === flashcards.length -1 ? "Finish" : "Next"}</button>
+          <button onClick={submitAnswer} className="next">{quizActive ? (state==States.SHOWING? "Next Question": "Submit Answer"): "Finish Quiz"}</button>
         </div>
       </div>
     </>

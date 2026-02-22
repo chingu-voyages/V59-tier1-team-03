@@ -1,40 +1,42 @@
-# voyage-tasks
+# Interview Helper
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+Interview Helper is a React app that helps users in different roles practice questions in preparation for interviews as Scrum Masters, Product Owners, Developers, and UX/UI Designers.
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+This app was created through a [Chingu](https://www.chingu.io/) tier 1 voyage.
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+## Features
+### Role Selection
+- Users can choose from five roles: Scrum Product Owner, Scrum Master, UI/UX Designer, Web Developer, and Python Developer.
+- Selecting a role populates a unique set of interview questions specific to that role.
 
-> Own it & Make it your Own!
+### Flashcard Questions
+- Users are given multiple-choice interview questions for the chosen role.
+- Immediate feedback is provided for each answer.
+- Each question allows up to three attempts to answer correctly within a session.
+- Questions are loaded from a JSON file containing all interview questions and answers.
 
-## Team Documents
+### Summary & Progress Tracking
+- After completing all questions, users receive a summary of the total number and percentage of correct and incorrect answers.
 
-You may find these helpful as you work together to organize your project.
+## Technologies
+Frontend: 
+- React – For building a fast, interactive, and modern user interface
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+UI Design:
+- Figma – For designing and prototyping a cohesive user experience.
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
+## Running the Project
+### Live Version:
+[Interview Helper](https:// /)
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+### From the Repo:
+1. Clone this project locally
+2. Run npm install in your bash / command line
+3. Run npm run dev in your bash / command line
+
 
 ## Our Team
-
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team *before* you start
-coding!
 
 - Afolayan Timileyin: [GitHub](https://github.com/justtimi) / [LinkedIn](https://linkedin.com/in/timmyafolayan)
 - Sebastian De La Quintana: [GitHub](https://github.com/sebastiandlq)
 - Valerie L.: [GitHub](https://github.com/val-ue) / [LinkedIn](https://www.linkedin.com/in/valerielabideveloper/)
-- M : [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)

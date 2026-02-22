@@ -1,23 +1,55 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import questions from "../flashcards"
+import QuizContext from "../QuizContext";
 
-const Summary = () => {
+
+const Summary = ({correctAnswers, numberOfQuestions}) => {
+  const { correctQuestions, totalQuestions, resetResults } = useContext(QuizContext);
+  console.log(correctQuestions, totalQuestions, 'from Summary');
+
+
+  useEffect(() => {
+    const savedAnswers = JSON.parse(localStorage.getItem('quizAnswers')) || [];
+    const role = localStorage.getItem('quizRole');
+    const flashcards = role ? questions[role]?.flashcards || [] : [];
+
+    const correct = savedAnswers.filter((ans, i) => {
+      ans === flashcards[i]?.answer
+    }).length
+
+    // resetResults(correct);
+    // resetResults(flashcards.length);
+  }, [])
+
+  const handleReset = () => {
+    resetResults();
+  };
+
+
+  const correctPercent = Math.round((correctQuestions / totalQuestions) * 100);
+  const wrongPercent = 100 - correctPercent;
   return (
     <div className='summary-main'>
       <div className='result-container'>
         <p className='medium-title'>Results</p>
 
         <div className="summary-container">
-          <div className="score-explanation medium-title">You answered 1/3
-          correctly!</div>
+          <div className="score-explanation medium-title">You answered {correctQuestions}/{totalQuestions} correctly!</div>
 
-          <button className='button retry'>Try again?</button>
+          <div className='percentage-container'>
+            
+          <p >Correct: {correctPercent}%</p>
+          <p >Wrong: {wrongPercent}%</p>
+          </div>
 
-          <div className="attempt-number">
+          <Link to="/"><button onClick={handleReset} className='button retry'>Try again?</button></Link>
+
+          {/*<div className="attempt-number">
             <div className="active-attempt-icon"></div>
             <div className="attempt-icon"></div>
             <div className="attempt-icon"></div>
-          </div>
+          </div> */}
 
           <p className='ending-message'>Keep practicing!</p>
         </div>
