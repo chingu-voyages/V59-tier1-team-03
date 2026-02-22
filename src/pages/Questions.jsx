@@ -17,10 +17,7 @@ const Questions = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [savedAnswers, setSavedAnswers] = useState([]);
-  const [wrongCount, setWrongCount] = useState(0);
-  const [questionMistake, setQuestionMistake] = React.useState({});
-  const [quizActive, setQuizActive] = useState(true);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [attempts, setAttempts] = useState(0);
 
   const States = Object.freeze({
     ANSWERING : 0,
@@ -48,10 +45,10 @@ const Questions = () => {
     const saved = JSON.parse(localStorage.getItem("quizAnswers"));
     const savedRole = localStorage.getItem("quizRole");
 
-    if (saved && savedRole === role) {
+    if (saved && savedRole === role && saved.length === flashcards.length) {
       setSavedAnswers(saved);
     } else {
-      setSavedAnswers(new Array(flashcards.length).fill(null));
+      setSavedAnswers(Array(flashcards.length).fill(null));
     }
   
   setCurrentQuestion(0);
@@ -73,28 +70,15 @@ const Questions = () => {
     setSavedAnswers(prev => {
       const updated = [...prev]
 
-      const correctAnswer = currentCard.answer;
+      
        if (updated[currentQuestion] === selected) {
         updated[currentQuestion] = null
        }else{
       updated[currentQuestion] = selected 
     }
 
-    const isWrong = selected !== correctAnswer;
 
-    setQuestionMistake(prev => {
-      const recorded = {...prev}
-
-      if (isWrong && !recorded[currentQuestion]) {
-        setWrongCount(prev => prev + 1)
-        recorded[currentQuestion] = true
-      }
-
-      if (!isWrong){
-        recorded[currentQuestion] = false
-      }
-      return recorded;
-    });
+  
 
     return updated;
 
@@ -102,15 +86,20 @@ const Questions = () => {
   }
 
   const submitAnswer = () => {
-    if(!quizActive){
+    if (currentSelection === null) {
+  alert("Please select an answer first.");
+  return;
+}
 
-      setResults(correctAnswers, flashcards.length)
-
+if(state === States.SHOWING){
+  if (currentQuestion === flashcards.length - 1) {
+  const correct = savedAnswers.filter((ans, i) => ans === flashcards[i]?.answer).length
+  setResults(correct, flashcards.length);
       navigate("/summary")
       return
-    }
-    if(state == States.SHOWING){
+  }
       goToQuestion(currentQuestion + 1)
+      setAttempts(0)
       setState(States.ANSWERING)
       return
     }
@@ -127,18 +116,20 @@ const Questions = () => {
   }
   const correctAnswer = () => {
     setState(States.SHOWING)
-    setCorrectAnswers(correctAnswers + 1)
     alert(flashcards[currentQuestion].rationale)
-    if(currentQuestion === flashcards.length - 1){
-      setQuizActive(false)
-    }
   }
+
   const wrongAnswer = () => {
-    setWrongCount(wrongCount + 1)
-    if (wrongCount >= 3) {
-      setQuizActive(false)
+    if (attempts < 2) {
+      setAttempts(prev => prev + 1)
+      alert(`Wrong answer. Try again! Attempts left: ${2 - attempts}`);
+
+    } else {
+      alert(
+      `Correct answer: ${flashcards[currentQuestion].answer}\n\n${flashcards[currentQuestion].rationale}`
+    );
+    setState(States.SHOWING)
     }
-    alert("Wrong Answer")
   }
 
   const formattedRole = role?.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
@@ -177,7 +168,7 @@ const Questions = () => {
             }} className="previous" disabled={currentQuestion === 0}>Previous</button> */}
 
             
-          <button onClick={submitAnswer} className="next">{quizActive ? (state==States.SHOWING? "Next Question": "Submit Answer"): "Finish Quiz"}</button>
+          <button onClick={submitAnswer} className="next">{state==States.SHOWING? "Next Question": "Submit Answer"}</button>
         </div>
       </div>
     </>

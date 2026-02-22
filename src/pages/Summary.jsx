@@ -9,25 +9,14 @@ const Summary = ({correctAnswers, numberOfQuestions}) => {
   console.log(correctQuestions, totalQuestions, 'from Summary');
 
 
-  useEffect(() => {
-    const savedAnswers = JSON.parse(localStorage.getItem('quizAnswers')) || [];
-    const role = localStorage.getItem('quizRole');
-    const flashcards = role ? questions[role]?.flashcards || [] : [];
 
-    const correct = savedAnswers.filter((ans, i) => {
-      ans === flashcards[i]?.answer
-    }).length
-
-    // resetResults(correct);
-    // resetResults(flashcards.length);
-  }, [])
 
   const handleReset = () => {
     resetResults();
   };
 
 
-  const correctPercent = Math.round((correctQuestions / totalQuestions) * 100);
+  const correctPercent = totalQuestions ? Math.round((correctQuestions / totalQuestions) * 100) : 0;
   const wrongPercent = 100 - correctPercent;
   return (
     <div className='summary-main'>
