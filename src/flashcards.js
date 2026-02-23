@@ -1070,125 +1070,135 @@ const questions = {
         rationale: "import allows code reuse by loading external modules.",
       },
       {
-        id: 81,
-        question: "What is semantic HTML?",
-        options: {
-          A: "HTML that uses meaningful tags to describe content structure.",
-          B: "Encrypted HTML.",
-          C: "Compressed HTML.",
-          D: "CSS-only pages.",
-        },
-        answer: "A",
-        rationale: "Semantic HTML improves accessibility and SEO.",
-      },
-      {
-        id: 82,
-        question: "What does REST API mean?",
-        options: {
-          A: "Random Execution Service Technology.",
-          B: "Architectural style for web communication using HTTP methods.",
-          C: "Backend database.",
-          D: "Frontend framework.",
-        },
-        answer: "B",
-        rationale: "REST APIs are widely used for client-server communication.",
-      },
-      {
-        id: 83,
-        question: "What is JavaScript mainly used for?",
-        options: {
-          A: "Adding interactivity to websites.",
-          B: "Database storage.",
-          C: "Network hardware control.",
-          D: "Operating system kernel.",
-        },
-        answer: "A",
-        rationale: "JavaScript enables dynamic web behavior.",
-      },
-      {
-        id: 84,
-        question: "What is the purpose of version control?",
-        options: {
-          A: "Track code changes and collaborate safely.",
-          B: "Run websites.",
-          C: "Style webpages.",
-          D: "Design logos.",
-        },
-        answer: "A",
-        rationale: "Version control systems help manage code history.",
-      },
-      {
-        id: 85,
-        question: "What is frontend development?",
-        options: {
-          A: "Server database management.",
-          B: "User interface and user experience implementation.",
-          C: "Network routing.",
-          D: "Hardware design.",
-        },
-        answer: "B",
-        rationale: "Frontend focuses on what users interact with.",
-      },
-      {
-        id: 86,
-        question: "What is CSS used for?",
-        options: {
-          A: "Structuring webpage content.",
-          B: "Styling HTML elements.",
-          C: "Running backend logic.",
-          D: "Database queries.",
-        },
-        answer: "B",
-        rationale: "CSS controls presentation and layout.",
-      },
-      {
-        id: 87,
-        question: "What is debugging?",
-        options: {
-          A: "Finding and fixing errors in code.",
-          B: "Writing new features only.",
-          C: "Deleting old files.",
-          D: "Designing UI.",
-        },
-        answer: "A",
-        rationale: "Debugging is essential in software development.",
-      },
-      {
-        id: 88,
-        question: "What is asynchronous programming?",
-        options: {
-          A: "Code that runs sequentially only.",
-          B: "Code that can execute tasks without blocking other operations.",
-          C: "Offline programming.",
-          D: "Synchronous hardware control.",
-        },
-        answer: "B",
-        rationale: "Async programming improves performance.",
-      },
-      {
-        id: 89,
-        question: "What is DOM manipulation?",
-        options: {
-          A: "Changing webpage structure using JavaScript.",
-          B: "Editing server files.",
-          C: "Compressing images.",
-          D: "Writing HTML comments.",
-        },
-        answer: "A",
-        rationale: "DOM APIs allow dynamic webpage updates.",
-      },
-      {
-        id: 90,
-        question: "What is web performance optimization?",
-        options: {
-          A: "Making websites load faster and run efficiently.",
-          B: "Adding more animations.",
-          C: "Using more images.",
-          D: "Increasing font sizes.",
-        },
-        answer: "A",
-        rationale: "Performance directly affects user experience.",
-      },
+  id: 81,
+  question: "What is the difference between a shallow copy and a deep copy in Python?",
+  options: {
+    A: "There is no difference.",
+    B: "Shallow copy copies only references to nested objects, while deep copy creates independent copies of all nested objects.",
+    C: "Deep copy only works for numbers.",
+    D: "Shallow copy deletes the original object.",
+  },
+  answer: "B",
+  rationale:
+    "A shallow copy duplicates the top-level object but references nested objects. A deep copy recursively copies all nested objects, making them fully independent.",
+},
+{
+  id: 82,
+  question: "What is the purpose of the 'self' keyword in a Python class?",
+  options: {
+    A: "It refers to the current instance of the class.",
+    B: "It defines a global variable.",
+    C: "It creates a static method.",
+    D: "It deletes the object.",
+  },
+  answer: "A",
+  rationale:
+    "'self' allows access to instance attributes and methods inside the class definition.",
+},
+{
+  id: 83,
+  question: "What are Python generators used for?",
+  options: {
+    A: "Generating random numbers only.",
+    B: "Creating values one at a time using the 'yield' keyword for memory efficiency.",
+    C: "Compiling Python to machine code.",
+    D: "Handling database queries.",
+  },
+  answer: "B",
+  rationale:
+    "Generators allow iteration over large datasets without storing everything in memory at once.",
+},
+{
+  id: 84,
+  question: "What does the 'lambda' keyword do in Python?",
+  options: {
+    A: "Creates an anonymous function.",
+    B: "Imports external modules.",
+    C: "Stops program execution.",
+    D: "Declares a class.",
+  },
+  answer: "A",
+  rationale:
+    "Lambda functions are small anonymous functions defined in a single expression.",
+},
+{
+  id: 85,
+  question: "What is the time complexity of checking if an element exists in a Python dictionary?",
+  options: {
+    A: "O(N)",
+    B: "O(N log N)",
+    C: "O(1) on average",
+    D: "O(N^2)",
+  },
+  answer: "C",
+  rationale:
+    "Dictionaries use hashing, which allows average constant-time lookup.",
+},
+{
+  id: 86,
+  question: "What is the purpose of the '__init__' method in Python classes?",
+  options: {
+    A: "It deletes the object.",
+    B: "It initializes object attributes when a new instance is created.",
+    C: "It imports modules.",
+    D: "It runs only once per file.",
+  },
+  answer: "B",
+  rationale:
+    "__init__ is the constructor method that runs when a new object is instantiated.",
+},
+{
+  id: 87,
+  question: "What does the 'with' statement help manage in Python?",
+  options: {
+    A: "Loops.",
+    B: "Conditional logic.",
+    C: "Context management like file handling, ensuring proper resource cleanup.",
+    D: "Variable naming.",
+  },
+  answer: "C",
+  rationale:
+    "The 'with' statement ensures resources (like files) are properly opened and closed automatically.",
+},
+{
+  id: 88,
+  question: "What is the difference between a list and a set in Python?",
+  options: {
+    A: "Lists allow duplicates; sets do not.",
+    B: "Sets allow duplicates; lists do not.",
+    C: "Lists are immutable; sets are mutable.",
+    D: "There is no difference.",
+  },
+  answer: "A",
+  rationale:
+    "Sets store only unique elements and are optimized for membership testing.",
+},
+{
+  id: 89,
+  question: "What is the Global Interpreter Lock (GIL) in CPython?",
+  options: {
+    A: "A lock that prevents file editing.",
+    B: "A mechanism that allows only one thread to execute Python bytecode at a time.",
+    C: "A database security feature.",
+    D: "A web server setting.",
+  },
+  answer: "B",
+  rationale:
+    "The GIL limits true parallelism in multi-threaded Python programs in CPython.",
+},
+{
+  id: 90,
+  question: "What is recursion?",
+  options: {
+    A: "A loop that never ends.",
+    B: "A function calling itself to solve smaller subproblems.",
+    C: "A database query method.",
+    D: "A debugging technique.",
+  },
+  answer: "B",
+  rationale:
+    "Recursion solves problems by breaking them into smaller instances of the same problem.",
+}
     ],
   },
 };
