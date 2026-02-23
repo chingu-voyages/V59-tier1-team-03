@@ -18,6 +18,7 @@ const Questions = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [savedAnswers, setSavedAnswers] = useState([]);
   const [attempts, setAttempts] = useState(0);
+  const [shuffledQuestions, setShuffledQuestions] = useState([])
 
   const States = Object.freeze({
     ANSWERING : 0,
@@ -34,7 +35,12 @@ const Questions = () => {
       </div>
     );
   }
-  const currentCard = flashcards[currentQuestion];
+
+const shuffleArray = (array) => {
+  return [...array].sort(() => Math.random() - 0.5);
+}
+
+  const currentCard = shuffledQuestions[currentQuestion];
 
   useEffect(()=> {
     localStorage.setItem("quizAnswers", JSON.stringify(savedAnswers));
@@ -42,17 +48,21 @@ const Questions = () => {
   }, [savedAnswers, role]);
 
   useEffect(() => {
+    const roleData = questions[role];
+    if (!roleData) return
+    const shuffled = shuffleArray(roleData.flashcards)
+    setShuffledQuestions(shuffled)
     const saved = JSON.parse(localStorage.getItem("quizAnswers"));
     const savedRole = localStorage.getItem("quizRole");
 
-    if (saved && savedRole === role && saved.length === flashcards.length) {
+    if (saved && savedRole === role && saved.length === shuffled.length) {
       setSavedAnswers(saved);
     } else {
-      setSavedAnswers(Array(flashcards.length).fill(null));
+      setSavedAnswers(Array(shuffled.length).fill(null));
     }
   
   setCurrentQuestion(0);
-}, [role, flashcards.length]);
+}, [role]);
 
 
 
@@ -93,7 +103,7 @@ const Questions = () => {
 
 if(state === States.SHOWING){
   if (currentQuestion === flashcards.length - 1) {
-  const correct = savedAnswers.filter((ans, i) => ans === flashcards[i]?.answer).length
+  const correct = savedAnswers.filter((ans, i) => ans === shuffledQuestions[i]?.answer).length
   setResults(correct, flashcards.length);
       navigate("/summary")
       return
@@ -112,11 +122,12 @@ if(state === States.SHOWING){
     }
   }
   const isCorrectAnswer = () => {
-    return currentSelection == flashcards[currentQuestion].answer
+    return currentSelection == shuffledQuestions[currentQuestion]?.answer
   }
   const correctAnswer = () => {
+    setAttempts(0)
     setState(States.SHOWING)
-    alert(flashcards[currentQuestion].rationale)
+    alert(shuffledQuestions[currentQuestion].rationale)
   }
 
   const wrongAnswer = () => {
@@ -126,7 +137,7 @@ if(state === States.SHOWING){
 
     } else {
       alert(
-      `Correct answer: ${flashcards[currentQuestion].answer}\n\n${flashcards[currentQuestion].rationale}`
+      `Correct answer: ${shuffledQuestions[currentQuestion].answer}\n\n${shuffledQuestions[currentQuestion].rationale}`
     );
     setState(States.SHOWING)
     }
