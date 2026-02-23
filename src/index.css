@@ -24,21 +24,18 @@ body {
 }
 
 h1 {
-  font-size: 8rem;
   font-weight: 900;
   color: #101828;
-  text-align: center;
 }
 
 h2 {
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 700;
   color: #101828;
-  text-align: center;
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: translateY(-2px);
   transition: transform 0.2s ease-in-out;
 }
 
@@ -106,6 +103,116 @@ header {
   /*height: -webkit-fill-available; */
 }
 
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  min-height: 80vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 4rem;
+}
+
+.hero-left{
+  flex: 1;
+  text-align: left;
+  max-width: 550px;
+}
+
+.hero-left h1,
+.hero-left h2,
+.hero-left p {
+  text-align: left;
+}
+
+.hero-right{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.hero-subtext {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  max-width: 520px;
+  color: #4a5565;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.secondary-button {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  background: transparent;
+   border: 2px solid #d1d5dc;
+  cursor: pointer;
+}
+
+.mock-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.mock-card {
+  transition: transform 0.3s ease;
+}
+
+.mock-card:hover {
+  transform: translateY(-8px);
+}
+
+.mock-option {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background-color: #f9fafb;  
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mock-option:hover {
+  background-color: #e6fffa;
+  transform: translateX(4px);
+}
+
+.correct-option {
+  background-color: #f0fdf4;
+  border: 2px solid #10b981;
+}
+
+.wrong-option {
+  background-color: #fef2f2;
+  border: 2px solid #ef4444;
+}
+
+.how-it-works {
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10rem;
+}
+
 .background-bubbles {
   display: flex;
   justify-content: space-around;
@@ -169,29 +276,33 @@ header {
   position: relative;
   z-index: 1;
   height: 100%;
+  gap: 2rem;
 }
 
 .main-title {
-  font-size: clamp(3rem, 17vw, 8rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
 }
 
 .main-text{
-  max-width: 900px;
+  max-width: 520px;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-top: 1.5rem;
+  color: #4a5565;
 }
 
 .start-button {
-  padding-left: 4rem;
-  padding-right: 4rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  margin-top: 0.5rem;
-  font-size: 2.25rem;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: white;
   border-radius: 1rem;
   background-color: #00d969;
   cursor: pointer;
-  width: 14rem;
+  width: auto;
   box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -4px rgba(0, 0, 0, 0.1);
@@ -199,8 +310,49 @@ header {
 
 .start-button:hover {
   transform: scale(1.1);
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   background-color: #00c54f;
+}
+
+.start-button:active {
+  transform: scale(0.97);
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #059669;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.how-card {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.how-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.cta-section {
+  margin-top: 8rem;
+  text-align: center;
 }
 
 footer {
@@ -575,4 +727,30 @@ footer {
   margin-bottom: 1.5rem;
   font-weight: 600;
   color: #101828;
+}
+/* THE MEDIA QUEERIES FOR THE HERO */
+
+@media (max-width: 900px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-left{
+    text-align: center;
+  }
+
+  .main-text{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .how-grid {
+    grid-template-columns: 1fr;
+  }
 }
